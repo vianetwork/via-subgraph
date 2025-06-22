@@ -13,8 +13,8 @@ export function handleMint(event: MintEvent): void {
   let entity = new Mint(
     event.transaction.hash.concatI32(event.logIndex.toI32())
   )
-  entity.account = event.params.account
-  entity.amount = event.params.amount
+  entity.receiver = event.params.account.toHexString()
+  entity.amount = event.params.amount.toString()
 
   entity.blockNumber = event.block.number
   entity.blockTimestamp = event.block.timestamp
@@ -27,9 +27,9 @@ export function handleTransfer(event: TransferEvent): void {
   let entity = new Transfer(
     event.transaction.hash.concatI32(event.logIndex.toI32())
   )
-  entity.from = event.params.from
-  entity.to = event.params.to
-  entity.value = event.params.value
+  entity.from = event.params.from.toHexString()
+  entity.to = event.params.to.toHexString()
+  entity.value = event.params.value.toString()
 
   entity.blockNumber = event.block.number
   entity.blockTimestamp = event.block.timestamp
@@ -42,9 +42,9 @@ export function handleWithdrawal(event: WithdrawalEvent): void {
   let entity = new Withdrawal(
     event.transaction.hash.concatI32(event.logIndex.toI32())
   )
-  entity._l2Sender = event.params._l2Sender
-  entity._l1Receiver = event.params._l1Receiver
-  entity._amount = event.params._amount
+  entity.sender = event.params._l2Sender.toHexString();
+  entity.receiver = event.params._l1Receiver.toHexString();
+  entity.amount = event.params._amount.toString()
 
   entity.blockNumber = event.block.number
   entity.blockTimestamp = event.block.timestamp

@@ -1,7 +1,7 @@
 type Mint @entity(immutable: true) {
   id: Bytes!
-  account: Bytes! # address
-  amount: BigInt! # uint256
+  receiver: String!
+  amount: String!
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
@@ -9,9 +9,9 @@ type Mint @entity(immutable: true) {
 
 type Transfer @entity(immutable: true) {
   id: Bytes!
-  from: Bytes! # address
-  to: Bytes! # address
-  value: BigInt! # uint256
+  from: String!
+  to: String!
+  value: String!
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
@@ -19,9 +19,9 @@ type Transfer @entity(immutable: true) {
 
 type Withdrawal @entity(immutable: true) {
   id: Bytes!
-  _l2Sender: Bytes! # address
-  _l1Receiver: Bytes! # address
-  _amount: BigInt! # uint256
+  sender: String!
+  receiver: String!
+  amount: String!
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
