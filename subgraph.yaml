@@ -6,7 +6,7 @@ schema:
 dataSources:
   - kind: ethereum
     name: contracts-preprocessed/L2BaseToken.sol:L2BaseToken
-    network: via
+    network: via-testnet
     source:
       address: "0x000000000000000000000000000000000000800a"
       abi: contracts-preprocessed/L2BaseToken.sol:L2BaseToken
