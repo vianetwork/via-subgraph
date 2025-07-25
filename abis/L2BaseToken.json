@@ -53,7 +53,7 @@
                 "type": "address"
             },
             {
-                "indexed": true,
+                "indexed": false,
                 "internalType": "bytes",
                 "name": "_l1Receiver",
                 "type": "bytes"
