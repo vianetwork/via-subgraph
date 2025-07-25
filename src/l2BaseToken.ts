@@ -43,7 +43,7 @@ export function handleWithdrawal(event: WithdrawalEvent): void {
     event.transaction.hash.concatI32(event.logIndex.toI32())
   )
   entity.sender = event.params._l2Sender.toHexString();
-  entity.receiver = event.params._l1Receiver.toHexString();
+  entity.receiver = event.params._l1Receiver.toString();
   entity.amount = event.params._amount.toString()
 
   entity.blockNumber = event.block.number
