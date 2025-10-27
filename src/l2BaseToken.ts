@@ -1,3 +1,4 @@
+import { Bytes } from "@graphprotocol/graph-ts";
 import {
   Mint as MintEvent,
   Transfer as TransferEvent,
@@ -39,9 +40,16 @@ export function handleTransfer(event: TransferEvent): void {
 }
 
 export function handleWithdrawal(event: WithdrawalEvent): void {
-  let entity = new Withdrawal(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  )
+  let txHash = event.transaction.hash;
+  let shortHash = Bytes.fromUint8Array(txHash.subarray(0, 8));
+
+  let logIndexBytes = new Bytes(2);
+  logIndexBytes[0] = (event.logIndex.toI32() >> 8) as u8;
+  logIndexBytes[1] = event.logIndex.toI32() as u8;
+
+  let id = shortHash.concat(logIndexBytes as Bytes);
+
+  let entity = new Withdrawal(id)
   entity.sender = event.params._l2Sender.toHexString();
   entity.receiver = event.params._l1Receiver.toString();
   entity.amount = event.params._amount.toString()
