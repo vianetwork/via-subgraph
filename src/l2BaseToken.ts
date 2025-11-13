@@ -11,9 +11,14 @@ import {
 } from "../generated/schema"
 
 export function handleMint(event: MintEvent): void {
-  let entity = new Mint(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  )
+  const id = event.transaction.hash.concatI32(event.logIndex.toI32());
+
+  let entity = Mint.load(id);
+  if (entity) {
+    return;
+  }
+
+  entity = new Mint(id)
   entity.receiver = event.params.account.toHexString()
   entity.amount = event.params.amount.toString()
 
@@ -25,9 +30,14 @@ export function handleMint(event: MintEvent): void {
 }
 
 export function handleTransfer(event: TransferEvent): void {
-  let entity = new Transfer(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  )
+  const id = event.transaction.hash.concatI32(event.logIndex.toI32());
+
+  let entity = Transfer.load(id);
+  if (entity) {
+    return;
+  }
+
+  entity = new Transfer(id)
   entity.from = event.params.from.toHexString()
   entity.to = event.params.to.toHexString()
   entity.value = event.params.value.toString()
@@ -49,7 +59,12 @@ export function handleWithdrawal(event: WithdrawalEvent): void {
 
   let id = shortHash.concat(logIndexBytes as Bytes);
 
-  let entity = new Withdrawal(id)
+  let entity = Withdrawal.load(id);
+  if (entity) {
+    return;
+  }
+
+  entity = new Withdrawal(id)
   entity.sender = event.params._l2Sender.toHexString();
   entity.receiver = event.params._l1Receiver.toString();
   entity.amount = event.params._amount.toString()
