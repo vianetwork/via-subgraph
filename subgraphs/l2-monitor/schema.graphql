@@ -1,0 +1,7 @@
+type Withdraw @entity {
+  id: ID!
+  shares: BigInt!
+  exchangeRate: BigInt!
+  receiver: Bytes!
+  nonce: BigInt!
+}

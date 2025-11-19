@@ -1,0 +1,13 @@
+type Deposit @entity {
+  id: ID!
+  totalTVL: BigInt!
+  sender: Bytes!
+  assets: BigInt!
+  receiver: Bytes!
+  nonce: BigInt!
+}
+
+type SyncFromL1 @entity {
+  id: ID!
+  totalTvl: BigInt!
+}
