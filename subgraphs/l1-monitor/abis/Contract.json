@@ -3,25 +3,19 @@
         "anonymous": false,
         "inputs": [
             {
-                "indexed": false,
+                "indexed": true,
                 "internalType": "uint256",
-                "name": "totalTVL",
+                "name": "nonce",
                 "type": "uint256"
             },
             {
-                "indexed": false,
+                "indexed": true,
                 "internalType": "address",
-                "name": "sender",
+                "name": "l1Vault",
                 "type": "address"
             },
             {
-                "indexed": false,
-                "internalType": "uint256",
-                "name": "assets",
-                "type": "uint256"
-            },
-            {
-                "indexed": false,
+                "indexed": true,
                 "internalType": "address",
                 "name": "receiver",
                 "type": "address"
@@ -29,24 +23,42 @@
             {
                 "indexed": false,
                 "internalType": "uint256",
-                "name": "nonce",
+                "name": "shares",
                 "type": "uint256"
             }
         ],
-        "name": "Deposit",
+        "name": "DepositMessageSent",
         "type": "event"
     },
     {
         "anonymous": false,
         "inputs": [
             {
+                "indexed": true,
+                "internalType": "uint256",
+                "name": "nonce",
+                "type": "uint256"
+            },
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "l1Vault",
+                "type": "address"
+            },
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "receiver",
+                "type": "address"
+            },
+            {
                 "indexed": false,
                 "internalType": "uint256",
-                "name": "totalTvl",
+                "name": "shares",
                 "type": "uint256"
             }
         ],
-        "name": "SyncFromL1",
+        "name": "MessageWithdrawalExecuted",
         "type": "event"
     }
 ]

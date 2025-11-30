@@ -1,13 +1,15 @@
-type Deposit @entity {
+type DepositMessageSent @entity {
   id: ID!
-  totalTVL: BigInt!
-  sender: Bytes!
-  assets: BigInt!
-  receiver: Bytes!
   nonce: BigInt!
+  l1Vault: Bytes!
+  receiver: Bytes!
+  shares: BigInt!
 }
 
-type SyncFromL1 @entity {
+type MessageWithdrawalExecuted @entity {
   id: ID!
-  totalTvl: BigInt!
+  nonce: BigInt!
+  l1Vault: Bytes!
+  receiver: Bytes!
+  shares: BigInt!
 }
