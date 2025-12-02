@@ -1,11 +1,19 @@
-import { Withdraw as WithdrawEvent } from "../generated/Contract/Contract"
-import { Withdraw } from "../generated/schema"
+import { WithdrawalSent as WithdrawalSentEvent, DepositExecuted as DepositExecutedEvent } from "../generated/Contract/Contract"
+import { WithdrawalSent, DepositExecuted } from "../generated/schema"
 
-export function handleWithdraw(event: WithdrawEvent): void {
-    let entity = new Withdraw(event.transaction.hash.concatI32(event.logIndex.toI32()).toHexString())
-    entity.shares = event.params.shares
-    entity.exchangeRate = event.params.exchangeRate
-    entity.receiver = event.params.receiver
+export function handleWithdrawalSent(event: WithdrawalSentEvent): void {
+    let entity = new WithdrawalSent(event.transaction.hash.concatI32(event.logIndex.toI32()).toHexString())
     entity.nonce = event.params.nonce
+    entity.l1Vault = event.params.l1Vault
+    entity.receiver = event.params.receiver
+    entity.shares = event.params.shares
+    entity.save()
+}
+
+export function handleDepositExecuted(event: DepositExecutedEvent): void {
+    let entity = new DepositExecuted(event.transaction.hash.concatI32(event.logIndex.toI32()).toHexString())
+    entity.vault = event.params.vault
+    entity.user = event.params.user
+    entity.shares = event.params.shares
     entity.save()
 }

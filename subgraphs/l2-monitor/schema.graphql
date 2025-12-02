@@ -1,7 +1,14 @@
-type Withdraw @entity {
+type WithdrawalSent @entity {
   id: ID!
-  shares: BigInt!
-  exchangeRate: BigInt!
-  receiver: Bytes!
   nonce: BigInt!
+  l1Vault: Bytes!
+  receiver: Bytes!
+  shares: BigInt!
+}
+
+type DepositExecuted @entity {
+  id: ID!
+  vault: Bytes!
+  user: Bytes!
+  shares: BigInt!
 }

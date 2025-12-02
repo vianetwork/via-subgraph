@@ -4,21 +4,25 @@ schema:
 dataSources:
   - kind: ethereum
     name: Contract
-    network: optimism
+    network: via-testnet
     source:
-      address: "0x0987654321098765432109876543210987654321"
+      address: "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9"
       abi: Contract
-      startBlock: 87654321
+      startBlock: 0
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
-        - Withdraw
+
+        - WithdrawalSent
+        - DepositExecuted
       abis:
         - name: Contract
           file: ./abis/Contract.json
       eventHandlers:
-        - event: Withdraw(uint256,uint256,address,uint256)
-          handler: handleWithdraw
+        - event: WithdrawalSent(indexed uint256,indexed address,indexed address,uint256)
+          handler: handleWithdrawalSent
+        - event: DepositExecuted(indexed address,indexed address,uint256)
+          handler: handleDepositExecuted
       file: ./src/mapping.ts
