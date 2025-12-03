@@ -1,14 +1,15 @@
 type DepositMessageSent @entity {
   id: ID!
-  nonce: BigInt!
+  vaultNonce: BigInt!
   l1Vault: Bytes!
+  l2Vault: Bytes!
   receiver: Bytes!
   shares: BigInt!
 }
 
 type MessageWithdrawalExecuted @entity {
   id: ID!
-  nonce: BigInt!
+  vaultNonce: BigInt!
   l1Vault: Bytes!
   receiver: Bytes!
   shares: BigInt!

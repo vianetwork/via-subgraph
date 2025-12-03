@@ -6,8 +6,9 @@ import {
 } from "../generated/Contract/Contract"
 
 export function createDepositMessageSentEvent(
-    nonce: BigInt,
+    vaultNonce: BigInt,
     l1Vault: Address,
+    l2Vault: Address,
     receiver: Address,
     shares: BigInt
 ): DepositMessageSent {
@@ -16,10 +17,13 @@ export function createDepositMessageSentEvent(
     depositMessageSentEvent.parameters = new Array()
 
     depositMessageSentEvent.parameters.push(
-        new ethereum.EventParam("nonce", ethereum.Value.fromUnsignedBigInt(nonce))
+        new ethereum.EventParam("vaultNonce", ethereum.Value.fromUnsignedBigInt(vaultNonce))
     )
     depositMessageSentEvent.parameters.push(
         new ethereum.EventParam("l1Vault", ethereum.Value.fromAddress(l1Vault))
+    )
+    depositMessageSentEvent.parameters.push(
+        new ethereum.EventParam("l2Vault", ethereum.Value.fromAddress(l2Vault))
     )
     depositMessageSentEvent.parameters.push(
         new ethereum.EventParam("receiver", ethereum.Value.fromAddress(receiver))
@@ -32,7 +36,7 @@ export function createDepositMessageSentEvent(
 }
 
 export function createMessageWithdrawalExecutedEvent(
-    nonce: BigInt,
+    vaultNonce: BigInt,
     l1Vault: Address,
     receiver: Address,
     shares: BigInt
@@ -44,7 +48,7 @@ export function createMessageWithdrawalExecutedEvent(
     messageWithdrawalExecutedEvent.parameters = new Array()
 
     messageWithdrawalExecutedEvent.parameters.push(
-        new ethereum.EventParam("nonce", ethereum.Value.fromUnsignedBigInt(nonce))
+        new ethereum.EventParam("vaultNonce", ethereum.Value.fromUnsignedBigInt(vaultNonce))
     )
     messageWithdrawalExecutedEvent.parameters.push(
         new ethereum.EventParam("l1Vault", ethereum.Value.fromAddress(l1Vault))

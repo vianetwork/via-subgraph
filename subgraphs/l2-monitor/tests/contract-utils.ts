@@ -8,6 +8,7 @@ import {
 export function createWithdrawalSentEvent(
     nonce: BigInt,
     l1Vault: Address,
+    l2Vault: Address,
     receiver: Address,
     shares: BigInt
 ): WithdrawalSent {
@@ -22,6 +23,9 @@ export function createWithdrawalSentEvent(
         new ethereum.EventParam("l1Vault", ethereum.Value.fromAddress(l1Vault))
     )
     withdrawalSentEvent.parameters.push(
+        new ethereum.EventParam("l2Vault", ethereum.Value.fromAddress(l2Vault))
+    )
+    withdrawalSentEvent.parameters.push(
         new ethereum.EventParam("receiver", ethereum.Value.fromAddress(receiver))
     )
     withdrawalSentEvent.parameters.push(
@@ -32,6 +36,7 @@ export function createWithdrawalSentEvent(
 }
 
 export function createDepositExecutedEvent(
+    nonce: BigInt,
     vault: Address,
     user: Address,
     shares: BigInt
@@ -40,6 +45,9 @@ export function createDepositExecutedEvent(
 
     depositExecutedEvent.parameters = new Array()
 
+    depositExecutedEvent.parameters.push(
+        new ethereum.EventParam("nonce", ethereum.Value.fromUnsignedBigInt(nonce))
+    )
     depositExecutedEvent.parameters.push(
         new ethereum.EventParam("vault", ethereum.Value.fromAddress(vault))
     )

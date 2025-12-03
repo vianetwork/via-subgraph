@@ -17,6 +17,12 @@
             {
                 "indexed": true,
                 "internalType": "address",
+                "name": "l2Vault",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "address",
                 "name": "receiver",
                 "type": "address"
             },
@@ -33,6 +39,12 @@
     {
         "anonymous": false,
         "inputs": [
+            {
+                "indexed": true,
+                "internalType": "uint256",
+                "name": "nonce",
+                "type": "uint256"
+            },
             {
                 "indexed": true,
                 "internalType": "address",

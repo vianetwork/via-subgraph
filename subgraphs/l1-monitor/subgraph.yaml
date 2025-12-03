@@ -21,7 +21,7 @@ dataSources:
         - name: Contract
           file: ./abis/Contract.json
       eventHandlers:
-        - event: DepositMessageSent(indexed uint256,indexed address,indexed address,uint256)
+        - event: DepositMessageSent(indexed uint256,indexed address,indexed address,address,uint256)
           handler: handleDepositMessageSent
         - event: MessageWithdrawalExecuted(indexed uint256,indexed address,indexed address,uint256)
           handler: handleMessageWithdrawalExecuted

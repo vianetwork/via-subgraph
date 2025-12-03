@@ -5,7 +5,7 @@
             {
                 "indexed": true,
                 "internalType": "uint256",
-                "name": "nonce",
+                "name": "vaultNonce",
                 "type": "uint256"
             },
             {
@@ -16,6 +16,12 @@
             },
             {
                 "indexed": true,
+                "internalType": "address",
+                "name": "l2Vault",
+                "type": "address"
+            },
+            {
+                "indexed": false,
                 "internalType": "address",
                 "name": "receiver",
                 "type": "address"
@@ -36,7 +42,7 @@
             {
                 "indexed": true,
                 "internalType": "uint256",
-                "name": "nonce",
+                "name": "vaultNonce",
                 "type": "uint256"
             },
             {

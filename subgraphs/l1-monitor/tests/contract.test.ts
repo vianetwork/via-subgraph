@@ -16,13 +16,15 @@ import { createDepositMessageSentEvent, createMessageWithdrawalExecutedEvent } f
 
 describe("Describe entity assertions", () => {
     beforeAll(() => {
-        let nonce = BigInt.fromI32(1)
+        let vaultNonce = BigInt.fromI32(1)
         let l1Vault = Address.fromString("0x0000000000000000000000000000000000000001")
+        let l2Vault = Address.fromString("0x0000000000000000000000000000000000000003")
         let receiver = Address.fromString("0x0000000000000000000000000000000000000002")
         let shares = BigInt.fromI32(100)
         let newDepositMessageSentEvent = createDepositMessageSentEvent(
-            nonce,
+            vaultNonce,
             l1Vault,
+            l2Vault,
             receiver,
             shares
         )
@@ -44,7 +46,7 @@ describe("Describe entity assertions", () => {
         assert.fieldEquals(
             "DepositMessageSent",
             id,
-            "nonce",
+            "vaultNonce",
             "1"
         )
         assert.fieldEquals(
@@ -52,6 +54,12 @@ describe("Describe entity assertions", () => {
             id,
             "l1Vault",
             "0x0000000000000000000000000000000000000001"
+        )
+        assert.fieldEquals(
+            "DepositMessageSent",
+            id,
+            "l2Vault",
+            "0x0000000000000000000000000000000000000003"
         )
         assert.fieldEquals(
             "DepositMessageSent",
@@ -64,6 +72,52 @@ describe("Describe entity assertions", () => {
             id,
             "shares",
             "100"
+        )
+    })
+
+    test("MessageWithdrawalExecuted created and stored", () => {
+        let vaultNonce = BigInt.fromI32(42)
+        let l1Vault = Address.fromString("0x0000000000000000000000000000000000000004")
+        let receiver = Address.fromString("0x0000000000000000000000000000000000000005")
+        let shares = BigInt.fromI32(250)
+
+        let newMessageWithdrawalExecutedEvent = createMessageWithdrawalExecutedEvent(
+            vaultNonce,
+            l1Vault,
+            receiver,
+            shares
+        )
+        handleMessageWithdrawalExecuted(newMessageWithdrawalExecutedEvent)
+
+        assert.entityCount("MessageWithdrawalExecuted", 1)
+
+        let defaultHash = Bytes.fromHexString("0xa16081f360e3847006db660bae1c6d1b2e17ec2a")
+        let logIndex = 1
+        let id = defaultHash.concatI32(logIndex).toHexString()
+
+        assert.fieldEquals(
+            "MessageWithdrawalExecuted",
+            id,
+            "vaultNonce",
+            "42"
+        )
+        assert.fieldEquals(
+            "MessageWithdrawalExecuted",
+            id,
+            "l1Vault",
+            "0x0000000000000000000000000000000000000004"
+        )
+        assert.fieldEquals(
+            "MessageWithdrawalExecuted",
+            id,
+            "receiver",
+            "0x0000000000000000000000000000000000000005"
+        )
+        assert.fieldEquals(
+            "MessageWithdrawalExecuted",
+            id,
+            "shares",
+            "250"
         )
     })
 })

@@ -21,8 +21,8 @@ dataSources:
         - name: Contract
           file: ./abis/Contract.json
       eventHandlers:
-        - event: WithdrawalSent(indexed uint256,indexed address,indexed address,uint256)
+        - event: WithdrawalSent(indexed uint256,indexed address,indexed address,address,uint256)
           handler: handleWithdrawalSent
-        - event: DepositExecuted(indexed address,indexed address,uint256)
+        - event: DepositExecuted(indexed uint256,indexed address,indexed address,uint256)
           handler: handleDepositExecuted
       file: ./src/mapping.ts
