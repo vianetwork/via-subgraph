@@ -1,4 +1,4 @@
-import { Bytes } from "@graphprotocol/graph-ts";
+import { BigInt, Bytes, log } from "@graphprotocol/graph-ts";
 import {
   Mint as MintEvent,
   Transfer as TransferEvent,
@@ -7,6 +7,7 @@ import {
 import {
   Mint,
   Transfer,
+  UserBalance,
   Withdrawal,
 } from "../generated/schema"
 
@@ -26,28 +27,63 @@ export function handleMint(event: MintEvent): void {
   entity.blockTimestamp = event.block.timestamp
   entity.transactionHash = event.transaction.hash
 
+
+  let userBalance = UserBalance.load(entity.receiver);
+  if (!userBalance) {
+    userBalance = new UserBalance(entity.receiver);
+    userBalance.balance = BigInt.fromI32(0);
+  }
+
+  userBalance.balance = userBalance.balance.plus(event.params.amount);
+  userBalance.updatedAt = event.block.timestamp;
+
   entity.save()
+  userBalance.save()
+
+  log.info("Mint inserted txhash: {}", [event.transaction.hash.toHexString()]);
 }
 
 export function handleTransfer(event: TransferEvent): void {
   const id = event.transaction.hash.concatI32(event.logIndex.toI32());
 
   let entity = Transfer.load(id);
-  if (entity) {
-    return;
+  if (entity) return;
+
+  entity = new Transfer(id);
+  entity.from = event.params.from.toHexString();
+  entity.to = event.params.to.toHexString();
+  entity.value = event.params.value.toString();
+  entity.blockNumber = event.block.number;
+  entity.blockTimestamp = event.block.timestamp;
+  entity.transactionHash = event.transaction.hash;
+
+  let fromUser = UserBalance.load(entity.from);
+  if (!fromUser) {
+    fromUser = new UserBalance(entity.from);
+    fromUser.balance = BigInt.fromI32(0);
   }
 
-  entity = new Transfer(id)
-  entity.from = event.params.from.toHexString()
-  entity.to = event.params.to.toHexString()
-  entity.value = event.params.value.toString()
+  let toUser = UserBalance.load(entity.to);
+  if (!toUser) {
+    toUser = new UserBalance(entity.to);
+    toUser.balance = BigInt.fromI32(0);
+  }
 
-  entity.blockNumber = event.block.number
-  entity.blockTimestamp = event.block.timestamp
-  entity.transactionHash = event.transaction.hash
+  let amount = event.params.value;
 
-  entity.save()
+  fromUser.balance = fromUser.balance.minus(amount);
+  toUser.balance = toUser.balance.plus(amount);
+
+  fromUser.updatedAt = event.block.timestamp;
+  toUser.updatedAt = event.block.timestamp;
+
+  fromUser.save();
+  toUser.save();
+
+  entity.save();
+  log.info("Transfer inserted txhash: {}", [event.transaction.hash.toHexString()]);
 }
+
 
 export function handleWithdrawal(event: WithdrawalEvent): void {
   let txHash = event.transaction.hash;
@@ -73,5 +109,17 @@ export function handleWithdrawal(event: WithdrawalEvent): void {
   entity.blockTimestamp = event.block.timestamp
   entity.transactionHash = event.transaction.hash
 
+  let userBalance = UserBalance.load(entity.sender);
+  if (!userBalance) {
+    userBalance = new UserBalance(entity.sender);
+    userBalance.balance = BigInt.fromI32(0);
+  }
+
+  userBalance.balance = userBalance.balance.minus(event.params._amount);
+  userBalance.updatedAt = event.block.timestamp;
+
   entity.save()
+  userBalance.save()
+
+  log.info("Withdrawal inserted txhash: {}", [event.transaction.hash.toHexString()]);
 }
