@@ -19,7 +19,7 @@ dataSources:
         - Mint
         - Transfer
         - Withdrawal
-        - WithdrawalWithMessage
+        - UserBalance
       abis:
         - name: contracts-preprocessed/L2BaseToken.sol:L2BaseToken
           file: ./abis/L2BaseToken.json
