@@ -6,26 +6,29 @@ up:
 down:
 	docker compose down -v
 
-# L1 Monitor
-install-l1:
-	cd subgraphs/l1-monitor && npm install
+# ETH Monitor (formerly L1 Monitor)
+install-eth:
+	cd subgraphs/eth-monitor && npm install
 
-codegen-l1:
-	cd subgraphs/l1-monitor && npm run codegen
+codegen-eth:
+	cd subgraphs/eth-monitor && npm run codegen
 
-build-l1:
-	cd subgraphs/l1-monitor && npm run build
+build-eth:
+	cd subgraphs/eth-monitor && npm run build
 
-create-local-l1:
-	cd subgraphs/l1-monitor && npm run create-local
+create-local-eth:
+	cd subgraphs/eth-monitor && npm run create-local
 
-deploy-local-l1:
-	cd subgraphs/l1-monitor && npm run deploy-local
+deploy-local-eth:
+	cd subgraphs/eth-monitor && npm run deploy-local
 
-remove-local-l1:
-	cd subgraphs/l1-monitor && npm run remove-local
+remove-local-eth:
+	cd subgraphs/eth-monitor && npm run remove-local
 
-# L2 Monitor
+test-eth:
+	cd subgraphs/eth-monitor && npm test
+
+# L2 Monitor (combined L2 subgraph)
 install-l2:
 	cd subgraphs/l2-monitor && npm install
 
@@ -44,32 +47,18 @@ deploy-local-l2:
 remove-local-l2:
 	cd subgraphs/l2-monitor && npm run remove-local
 
-# L2 Base Token
-install-base:
-	cd subgraphs/l2-base-token && npm install
-
-codegen-base:
-	cd subgraphs/l2-base-token && npm run codegen
-
-build-base:
-	cd subgraphs/l2-base-token && npm run build
-
-create-local-base:
-	cd subgraphs/l2-base-token && npm run create-local
-
-deploy-local-base:
-	cd subgraphs/l2-base-token && npm run deploy-local
-
-remove-local-base:
-	cd subgraphs/l2-base-token && npm run remove-local
+test-l2:
+	cd subgraphs/l2-monitor && npm test
 
 # Global
-install-all: install-l1 install-l2 install-base
+install-all: install-eth install-l2
 
-codegen-all: codegen-l1 codegen-l2 codegen-base
+codegen-all: codegen-eth codegen-l2
 
-build-all: build-l1 build-l2 build-base
+build-all: build-eth build-l2
 
-deploy-all-local: deploy-local-l1 deploy-local-l2 deploy-local-base
+deploy-all-local: deploy-local-eth deploy-local-l2
 
-.PHONY: up down install-l1 codegen-l1 build-l1 create-local-l1 deploy-local-l1 remove-local-l1 install-l2 codegen-l2 build-l2 create-local-l2 deploy-local-l2 remove-local-l2 install-base codegen-base build-base create-local-base deploy-local-base remove-local-base install-all codegen-all build-all deploy-all-local
+test-all: test-eth test-l2
+
+.PHONY: up down install-eth codegen-eth build-eth create-local-eth deploy-local-eth remove-local-eth test-eth install-l2 codegen-l2 build-l2 create-local-l2 deploy-local-l2 remove-local-l2 test-l2 install-all codegen-all build-all deploy-all-local test-all

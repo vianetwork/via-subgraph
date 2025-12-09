@@ -7,14 +7,14 @@ import {
     afterAll
 } from "matchstick-as/assembly/index"
 import { Address, BigInt, Bytes } from "@graphprotocol/graph-ts"
-import { Mint as MintEvent } from "../generated/contracts-preprocessed/L2BaseToken.sol:L2BaseToken/contracts_preprocessed_L2BaseToken_sol_L2BaseToken"
+import { Mint as MintEvent } from "../generated/L2BaseToken/L2BaseToken"
 import { handleMint } from "../src/l2BaseToken"
 import { createMintEvent } from "./l2-base-token-utils"
 
 // Tests structure (matchstick-as >=0.5.0)
 // https://thegraph.com/docs/en/developer/matchstick/#tests-structure-0-5-0
 
-describe("Describe entity assertions", () => {
+describe("L2BaseToken entity assertions", () => {
     beforeAll(() => {
         let account = Address.fromString(
             "0x0000000000000000000000000000000000000001"

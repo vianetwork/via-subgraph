@@ -14,3 +14,32 @@ type DepositExecuted @entity {
   user: Bytes!
   shares: BigInt!
 }
+
+type Mint @entity(immutable: true) {
+  id: Bytes!
+  receiver: String!
+  amount: String!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Transfer @entity(immutable: true) {
+  id: Bytes!
+  from: String!
+  to: String!
+  value: String!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Withdrawal @entity(immutable: true) {
+  id: Bytes!
+  sender: String!
+  receiver: String!
+  amount: String!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}

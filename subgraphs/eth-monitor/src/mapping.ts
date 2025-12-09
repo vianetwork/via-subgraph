@@ -2,7 +2,14 @@ import { DepositMessageSent as DepositMessageSentEvent, MessageWithdrawalExecute
 import { DepositMessageSent, MessageWithdrawalExecuted } from "../generated/schema"
 
 export function handleDepositMessageSent(event: DepositMessageSentEvent): void {
-    let entity = new DepositMessageSent(event.transaction.hash.concatI32(event.logIndex.toI32()).toHexString())
+    const id = event.transaction.hash.concatI32(event.logIndex.toI32()).toHexString()
+
+    let entity = DepositMessageSent.load(id)
+    if (entity) {
+        return
+    }
+
+    entity = new DepositMessageSent(id)
     entity.vaultNonce = event.params.vaultNonce
     entity.l1Vault = event.params.l1Vault
     entity.l2Vault = event.params.l2Vault
@@ -12,7 +19,14 @@ export function handleDepositMessageSent(event: DepositMessageSentEvent): void {
 }
 
 export function handleMessageWithdrawalExecuted(event: MessageWithdrawalExecutedEvent): void {
-    let entity = new MessageWithdrawalExecuted(event.transaction.hash.concatI32(event.logIndex.toI32()).toHexString())
+    const id = event.transaction.hash.concatI32(event.logIndex.toI32()).toHexString()
+
+    let entity = MessageWithdrawalExecuted.load(id)
+    if (entity) {
+        return
+    }
+
+    entity = new MessageWithdrawalExecuted(id)
     entity.vaultNonce = event.params.vaultNonce
     entity.l1Vault = event.params.l1Vault
     entity.receiver = event.params.receiver
