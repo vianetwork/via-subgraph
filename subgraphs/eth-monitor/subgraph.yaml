@@ -3,11 +3,11 @@ schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum
-    name: Contract
+    name: EthBridge
     network: sepolia
     source:
       address: "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9"
-      abi: Contract
+      abi: EthBridge
       startBlock: 0
     mapping:
       kind: ethereum/events
@@ -18,7 +18,7 @@ dataSources:
         - DepositMessageSent
         - MessageWithdrawalExecuted
       abis:
-        - name: Contract
+        - name: EthBridge
           file: ./abis/Contract.json
       eventHandlers:
         - event: DepositMessageSent(indexed uint256,indexed address,indexed address,address,uint256)

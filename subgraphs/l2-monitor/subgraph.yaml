@@ -33,11 +33,11 @@ dataSources:
       file: ./src/l2BaseToken.ts
   # L2Monitor contract events
   - kind: ethereum
-    name: Contract
+    name: EthBridge
     network: via-testnet
     source:
       address: "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9"
-      abi: Contract
+      abi: EthBridge
       startBlock: 0
     mapping:
       kind: ethereum/events
@@ -47,7 +47,7 @@ dataSources:
         - WithdrawalSent
         - DepositExecuted
       abis:
-        - name: Contract
+        - name: EthBridge
           file: ./abis/Contract.json
       eventHandlers:
         - event: WithdrawalSent(indexed uint256,indexed address,indexed address,address,uint256)

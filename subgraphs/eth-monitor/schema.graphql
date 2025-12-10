@@ -5,6 +5,9 @@ type DepositMessageSent @entity {
   l2Vault: Bytes!
   receiver: Bytes!
   shares: BigInt!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
 }
 
 type MessageWithdrawalExecuted @entity {
@@ -13,4 +16,7 @@ type MessageWithdrawalExecuted @entity {
   l1Vault: Bytes!
   receiver: Bytes!
   shares: BigInt!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
 }

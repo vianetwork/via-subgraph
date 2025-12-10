@@ -5,6 +5,9 @@ type WithdrawalSent @entity {
   l2Vault: Bytes!
   receiver: Bytes!
   shares: BigInt!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
 }
 
 type DepositExecuted @entity {
@@ -13,6 +16,9 @@ type DepositExecuted @entity {
   vault: Bytes!
   user: Bytes!
   shares: BigInt!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
 }
 
 type Mint @entity(immutable: true) {

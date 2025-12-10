@@ -1,4 +1,4 @@
-import { DepositMessageSent as DepositMessageSentEvent, MessageWithdrawalExecuted as MessageWithdrawalExecutedEvent } from "../generated/Contract/Contract"
+import { DepositMessageSent as DepositMessageSentEvent, MessageWithdrawalExecuted as MessageWithdrawalExecutedEvent } from "../generated/EthBridge/EthBridge"
 import { DepositMessageSent, MessageWithdrawalExecuted } from "../generated/schema"
 
 export function handleDepositMessageSent(event: DepositMessageSentEvent): void {
@@ -15,6 +15,9 @@ export function handleDepositMessageSent(event: DepositMessageSentEvent): void {
     entity.l2Vault = event.params.l2Vault
     entity.receiver = event.params.receiver
     entity.shares = event.params.shares
+    entity.blockNumber = event.block.number
+    entity.blockTimestamp = event.block.timestamp
+    entity.transactionHash = event.transaction.hash
     entity.save()
 }
 
@@ -31,5 +34,8 @@ export function handleMessageWithdrawalExecuted(event: MessageWithdrawalExecuted
     entity.l1Vault = event.params.l1Vault
     entity.receiver = event.params.receiver
     entity.shares = event.params.shares
+    entity.blockNumber = event.block.number
+    entity.blockTimestamp = event.block.timestamp
+    entity.transactionHash = event.transaction.hash
     entity.save()
 }
