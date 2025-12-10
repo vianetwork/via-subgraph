@@ -26,3 +26,17 @@ type Withdrawal @entity(immutable: true) {
   blockTimestamp: BigInt!
   transactionHash: Bytes!
 }
+
+type UserBalance @entity {
+  id: ID!
+  balance: BigInt!
+  updatedAt: BigInt!
+}
+
+type UserDailyBalance @entity {
+  id: ID!
+  user: String!
+  dayID: Int!
+  balance: BigInt!
+  timestamp: BigInt!
+}

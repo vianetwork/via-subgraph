@@ -1,7 +1,7 @@
 include .example.env
 
 up:
-	docker compose up --build
+	docker compose up --build -d
 
 down:
 	docker compose down -v
