@@ -21,6 +21,14 @@ type DepositExecuted @entity {
   transactionHash: Bytes!
 }
 
+type MessageSent @entity {
+  id: ID!
+  payload: Bytes!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
 type Mint @entity(immutable: true) {
   id: Bytes!
   receiver: String!

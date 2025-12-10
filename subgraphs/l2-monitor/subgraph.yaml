@@ -55,3 +55,23 @@ dataSources:
         - event: DepositExecuted(indexed uint256,indexed address,indexed address,uint256)
           handler: handleDepositExecuted
       file: ./src/mapping.ts
+  - kind: ethereum
+    name: L2MessageMonitor
+    network: via-testnet
+    source:
+      address: "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707"
+      abi: EthBridge
+      startBlock: 0
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - MessageSent
+      abis:
+        - name: EthBridge
+          file: ./abis/Contract.json
+      eventHandlers:
+        - event: MessageSent(bytes)
+          handler: handleMessageSent
+      file: ./src/mapping.ts

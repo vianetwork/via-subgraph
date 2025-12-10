@@ -66,5 +66,18 @@
         ],
         "name": "DepositExecuted",
         "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "bytes",
+                "name": "payload",
+                "type": "bytes"
+            }
+        ],
+        "name": "MessageSent",
+        "type": "event"
     }
 ]

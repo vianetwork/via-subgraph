@@ -20,3 +20,11 @@ type MessageWithdrawalExecuted @entity {
   blockTimestamp: BigInt!
   transactionHash: Bytes!
 }
+
+type MessageSent @entity {
+  id: ID!
+  payload: Bytes!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
