@@ -41,9 +41,14 @@ export function handleMessageWithdrawalExecuted(event: MessageWithdrawalExecuted
 }
 
 export function handleMessageSent(event: MessageSentEvent): void {
-    let entity = new MessageSent(
-        event.transaction.hash.concatI32(event.logIndex.toI32()).toHexString()
-    )
+    const id = event.transaction.hash.concatI32(event.logIndex.toI32()).toHexString()
+
+    let entity = MessageSent.load(id)
+    if (entity) {
+        return
+    }
+
+    entity = new MessageSent(id)
     entity.payload = event.params.payload
     entity.blockNumber = event.block.number
     entity.blockTimestamp = event.block.timestamp

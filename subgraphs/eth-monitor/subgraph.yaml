@@ -6,9 +6,9 @@ dataSources:
     name: EthBridge
     network: sepolia
     source:
-      address: "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9"
+      address: "0x9653A68ce09e3B5C3670b70Bab88aD11F80D8Df4"
       abi: EthBridge
-      startBlock: 0
+      startBlock: 9811383
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -30,9 +30,9 @@ dataSources:
     name: EthMessageMonitor
     network: sepolia
     source:
-      address: "0x0165878A594ca255338adfa4d48449f69242Eb8F"
+      address: "0xBB052362827D526f0A51A9d1D6f5389D3e64a9F7"
       abi: EthBridge
-      startBlock: 0
+      startBlock: 9811383
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
