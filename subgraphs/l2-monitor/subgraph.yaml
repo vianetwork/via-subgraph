@@ -36,9 +36,9 @@ dataSources:
     name: EthBridge
     network: via-testnet
     source:
-      address: "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9"
+      address: "0xAceD7336aD728b8AF3a613119992cDe246D8BE6E"
       abi: EthBridge
-      startBlock: 0
+      startBlock: 1
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -59,9 +59,9 @@ dataSources:
     name: L2MessageMonitor
     network: via-testnet
     source:
-      address: "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707"
+      address: "0xf473D9e434Df4ee2967bb8994AaAd05D479F7ce3"
       abi: EthBridge
-      startBlock: 0
+      startBlock: 1
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7

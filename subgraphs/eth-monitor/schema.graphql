@@ -28,3 +28,13 @@ type MessageSent @entity {
   blockTimestamp: BigInt!
   transactionHash: Bytes!
 }
+
+type WithdrawalStateUpdated @entity {
+  id: ID!
+  l1Batch: BigInt!
+  exchangeRate: BigInt!
+  messageCount: BigInt!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}

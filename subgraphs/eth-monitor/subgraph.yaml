@@ -8,7 +8,7 @@ dataSources:
     source:
       address: "0x9653A68ce09e3B5C3670b70Bab88aD11F80D8Df4"
       abi: EthBridge
-      startBlock: 9811383
+      startBlock: 9821000
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -32,7 +32,7 @@ dataSources:
     source:
       address: "0xBB052362827D526f0A51A9d1D6f5389D3e64a9F7"
       abi: EthBridge
-      startBlock: 9811383
+      startBlock: 9821000
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -45,4 +45,24 @@ dataSources:
       eventHandlers:
         - event: MessageSent(bytes)
           handler: handleMessageSent
+      file: ./src/mapping.ts
+  - kind: ethereum
+    name: WithdrawalStateMonitor
+    network: sepolia
+    source:
+      address: "0x9EeFF68EC46c1EC5B08fAe9C014f9f00c04dbB41"
+      abi: WithdrawalStateMonitor
+      startBlock: 9821000
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - WithdrawalStateUpdated
+      abis:
+        - name: WithdrawalStateMonitor
+          file: ./abis/WithdrawalStateMonitor.json
+      eventHandlers:
+        - event: WithdrawalStateUpdated(indexed uint256,uint256,uint256)
+          handler: handleWithdrawalStateUpdated
       file: ./src/mapping.ts
