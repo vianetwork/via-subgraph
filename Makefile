@@ -57,6 +57,8 @@ codegen-all: codegen-eth codegen-l2
 
 build-all: build-eth build-l2
 
+create-all-local: create-local-eth create-local-l2
+
 deploy-all-local: deploy-local-eth deploy-local-l2
 
 test-all: test-eth test-l2

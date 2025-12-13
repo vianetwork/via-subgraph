@@ -36,7 +36,7 @@ dataSources:
     name: EthBridge
     network: via-testnet
     source:
-      address: "0xAceD7336aD728b8AF3a613119992cDe246D8BE6E"
+      address: "0x9dA9DEA66940b14933Dc884F8E0ddb95D04DF21E"
       abi: EthBridge
       startBlock: 1
     mapping:
@@ -59,7 +59,7 @@ dataSources:
     name: L2MessageMonitor
     network: via-testnet
     source:
-      address: "0xf473D9e434Df4ee2967bb8994AaAd05D479F7ce3"
+      address: "0x007aa7C82E5730810912D469f26b097A800160F8"
       abi: EthBridge
       startBlock: 1
     mapping:
