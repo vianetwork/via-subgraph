@@ -133,17 +133,21 @@ export function snapshotUserDailyBalance(
   balance: BigInt,
   timestamp: BigInt
 ): void {
-  let dayID = timestamp.toI32() / 86400
-  let id = user.concat("-").concat(dayID.toString())
+  let dayID = timestamp.toI32() / 86400;
 
-  let snap = UserDailyBalance.load(id)
-  if (!snap) {
-    snap = new UserDailyBalance(id)
-    snap.user = user
-    snap.dayID = dayID
-    snap.timestamp = BigInt.fromI32(dayID * 86400)
+  let id = user + "-" + dayID.toString();
+
+  let snap = UserDailyBalance.load(id);
+
+  if (snap == null) {
+    snap = new UserDailyBalance(id);
+    snap.user = user;
+    snap.dayID = dayID;
   }
 
-  snap.balance = balance
-  snap.save()
+  snap.balance = balance;
+
+  snap.timestamp = timestamp;
+
+  snap.save();
 }

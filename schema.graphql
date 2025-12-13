@@ -30,13 +30,13 @@ type Withdrawal @entity(immutable: true) {
 type UserBalance @entity {
   id: ID!
   balance: BigInt!
-  updatedAt: BigInt!
+  updatedAt: BigInt! @index
 }
 
 type UserDailyBalance @entity {
   id: ID!
-  user: String!
-  dayID: Int!
+  user: String! @index
+  dayID: Int! @index
   balance: BigInt!
-  timestamp: BigInt!
+  timestamp: BigInt! @index
 }
