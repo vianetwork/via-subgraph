@@ -1,0 +1,77 @@
+specVersion: 1.0.0
+indexerHints:
+  prune: auto
+schema:
+  file: ./schema.graphql
+dataSources:
+  # L2BaseToken contract events
+  - kind: ethereum
+    name: L2BaseToken
+    network: via-testnet
+    source:
+      address: "0x000000000000000000000000000000000000800a"
+      abi: L2BaseToken
+      startBlock: 1
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Mint
+        - Transfer
+        - Withdrawal
+      abis:
+        - name: L2BaseToken
+          file: ./abis/L2BaseToken.json
+      eventHandlers:
+        - event: Mint(indexed address,uint256)
+          handler: handleMint
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+        - event: Withdrawal(indexed address,bytes,uint256)
+          handler: handleWithdrawal
+      file: ./src/l2BaseToken.ts
+  # L2Monitor contract events
+  - kind: ethereum
+    name: EthBridge
+    network: via-testnet
+    source:
+      address: "0x9dA9DEA66940b14933Dc884F8E0ddb95D04DF21E"
+      abi: EthBridge
+      startBlock: 1
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - WithdrawalSent
+        - DepositExecuted
+      abis:
+        - name: EthBridge
+          file: ./abis/Contract.json
+      eventHandlers:
+        - event: WithdrawalSent(indexed uint256,indexed address,indexed address,address,uint256)
+          handler: handleWithdrawalSent
+        - event: DepositExecuted(indexed uint256,indexed address,indexed address,uint256)
+          handler: handleDepositExecuted
+      file: ./src/mapping.ts
+  - kind: ethereum
+    name: L2MessageMonitor
+    network: via-testnet
+    source:
+      address: "0x007aa7C82E5730810912D469f26b097A800160F8"
+      abi: EthBridge
+      startBlock: 1
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - MessageSent
+      abis:
+        - name: EthBridge
+          file: ./abis/Contract.json
+      eventHandlers:
+        - event: MessageSent(bytes)
+          handler: handleMessageSent
+      file: ./src/mapping.ts

@@ -1,0 +1,40 @@
+type DepositMessageSent @entity {
+  id: ID!
+  vaultNonce: BigInt!
+  l1Vault: Bytes!
+  l2Vault: Bytes!
+  receiver: Bytes!
+  shares: BigInt!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type MessageWithdrawalExecuted @entity {
+  id: ID!
+  vaultNonce: BigInt!
+  l1Vault: Bytes!
+  receiver: Bytes!
+  shares: BigInt!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type MessageSent @entity {
+  id: ID!
+  payload: Bytes!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type WithdrawalStateUpdated @entity {
+  id: ID!
+  l1Batch: BigInt!
+  exchangeRate: BigInt!
+  messageCount: BigInt!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}

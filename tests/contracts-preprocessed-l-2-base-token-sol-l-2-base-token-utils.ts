@@ -4,7 +4,7 @@ import {
   Mint,
   Transfer,
   Withdrawal
-} from "../generated/contracts-preprocessed/L2BaseToken.sol:L2BaseToken/contracts-preprocessed/L2BaseToken.sol:L2BaseToken"
+} from "../subgraphs/l2-base-token/generated/contracts-preprocessed/L2BaseToken.sol:L2BaseToken/contracts-preprocessed/L2BaseToken.sol:L2BaseToken"
 
 export function createMintEvent(account: Address, amount: BigInt): Mint {
   let mintEvent = changetype<Mint>(newMockEvent())

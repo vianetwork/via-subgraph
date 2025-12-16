@@ -1,0 +1,20 @@
+{
+    "name": "l2-monitor",
+    "license": "UNLICENSED",
+    "scripts": {
+        "codegen": "graph codegen",
+        "build": "graph build",
+        "deploy": "graph deploy --node https://api.studio.thegraph.com/deploy/ l2-monitor",
+        "create-local": "graph create --node http://localhost:8020/ l2-monitor",
+        "remove-local": "graph remove --node http://localhost:8020/ l2-monitor",
+        "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 l2-monitor",
+        "test": "graph test"
+    },
+    "dependencies": {
+        "@graphprotocol/graph-cli": "0.86.0",
+        "@graphprotocol/graph-ts": "0.32.0"
+    },
+    "devDependencies": {
+        "matchstick-as": "0.5.0"
+    }
+}

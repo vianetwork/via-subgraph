@@ -3,7 +3,7 @@ import {
   Mint as MintEvent,
   Transfer as TransferEvent,
   Withdrawal as WithdrawalEvent,
-} from "../generated/contracts-preprocessed/L2BaseToken.sol:L2BaseToken/contracts_preprocessed_L2BaseToken_sol_L2BaseToken"
+} from "../generated/L2BaseToken/L2BaseToken"
 import {
   Mint,
   Transfer,

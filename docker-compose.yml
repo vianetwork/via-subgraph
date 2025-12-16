@@ -1,4 +1,3 @@
-version: "3"
 services:
   graph-node:
     image: graphprotocol/graph-node
@@ -14,13 +13,18 @@ services:
     extra_hosts:
       - host.docker.internal:host-gateway
     environment:
-      postgres_host: postgres
-      postgres_user: graph-node
-      postgres_pass: let-me-in
-      postgres_db: graph-node
-      ipfs: "ipfs:5001"
-      ethereum: "via-testnet:${L2_RPC_URL}"
       GRAPH_LOG: info
+    entrypoint:
+      - /bin/sh
+      - -c
+      - 'unset GRAPH_NODE_CONFIG; exec /usr/local/bin/graph-node "$@"'
+      - --
+    command:
+      - --postgres-url=postgresql://graph-node:let-me-in@postgres:5432/graph-node
+      - --ipfs=ipfs:5001
+      - --ethereum-rpc=via-testnet:${L2_RPC_URL}
+      - --ethereum-rpc=sepolia:${L1_RPC_URL}
+      - --node-id=default
   ipfs:
     image: ipfs/kubo:v0.17.0
     ports:
@@ -31,12 +35,7 @@ services:
     image: postgres:14
     ports:
       - "5450:5432"
-    command:
-      [
-        "postgres",
-        "-cshared_preload_libraries=pg_stat_statements",
-        "-cmax_connections=200",
-      ]
+    command: [ "postgres", "-cshared_preload_libraries=pg_stat_statements", "-cmax_connections=200" ]
     environment:
       POSTGRES_USER: graph-node
       POSTGRES_PASSWORD: let-me-in
